@@ -1,0 +1,17 @@
+[package]
+org = "nimsarafernando"
+name = "fhir"
+version = "0.1.0"
+distribution = "2201.8.2"
+
+[build-options]
+observabilityIncluded = true
+
+[platform.java11]
+graalvmCompatible = true
+
+[[platform.java11.dependency]]
+groupId = "nimsara66.fhir"
+artifactId = "fhir"
+version = "1.0-SNAPSHOT"
+path = "/Users/nimsarafernando/Desktop/fhir/target/fhir-1.0-SNAPSHOT-jar-with-dependencies.jar"
