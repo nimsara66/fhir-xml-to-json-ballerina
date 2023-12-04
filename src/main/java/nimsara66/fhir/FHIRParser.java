@@ -51,7 +51,7 @@ public class FHIRParser {
         // i_bmap.put(StringUtils.fromString("name"), (long) 1);
         // i_bmap.put(StringUtils.fromString("name"), true);
         i_bmap.put(StringUtils.fromString("name"), (double) 1.23);
-        BArray arrj = ValueCreator.createArrayValue(TypeCreator.createArrayType(PredefinedTypes.TYPE_JSON));
+        // BArray arrj = ValueCreator.createArrayValue(TypeCreator.createArrayType(PredefinedTypes.TYPE_JSON));
         return bmap;
     }
 
