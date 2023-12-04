@@ -14,4 +14,4 @@ graalvmCompatible = true
 groupId = "nimsara66.fhir"
 artifactId = "fhir"
 version = "1.0-SNAPSHOT"
-path = "/Users/nimsarafernando/Desktop/fhir/target/fhir-1.0-SNAPSHOT-jar-with-dependencies.jar"
+path = "/Users/nimsarafernando/Projects/fhir/target/fhir-1.0-SNAPSHOT-jar-with-dependencies.jar"

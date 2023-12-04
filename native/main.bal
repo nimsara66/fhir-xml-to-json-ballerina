@@ -4,8 +4,6 @@ import ballerina/jballerina.java;
 public type Error distinct error;
 
 public function main() returns Error? {
-    io:println("Hello, World!");
-
     xml patient = xml `
         <Patient xmlns="http://hl7.org/fhir">
             <id value="example"/> 
@@ -140,8 +138,25 @@ public function main() returns Error? {
             </Patient> 
     `;
 
-    json patientJson = check convertXmlToJsonBal(patient);
-    io:println(patientJson);
+    // json patientJson = check convertXmlToJsonBal(patient);
+    // do {
+	//     json jj = check patientJson.name;
+    //     decimal num = check jj.name;
+    //     io:print(num); 
+    // } on fail var e {
+    // 	io:print(e);
+    // }
+    // io:println(patientJson);
+    // string hi = check hello();
+    // io:println(hi);
+
+    json patientJson = check convertTest(patient);
+    do {
+	    boolean active = check patientJson.active;
+        io:println(active);
+    } on fail var e {
+    	io:println(e);
+    }
 }
 
 # Converts an XML object to its JSON representation.
@@ -153,5 +168,13 @@ public function main() returns Error? {
 # + xmlValue - The XML source to be converted to JSON
 # + return - The JSON representation of the given XML on success, else returns an `xmldata:Error`
 public isolated function convertXmlToJsonBal(xml xmlValue) returns json|Error = @java:Method {
+    'class: "nimsara66.fhir.FHIRParser"
+} external;
+
+public isolated function convertTest(xml xmlValue) returns json|Error = @java:Method {
+    'class: "nimsara66.fhir.FHIRParser"
+} external;
+
+public isolated function hello() returns string|Error = @java:Method {
     'class: "nimsara66.fhir.FHIRParser"
 } external;
