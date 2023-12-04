@@ -1,9 +1,10 @@
 import ballerina/io;
 import ballerina/jballerina.java;
-
+// import ballerina/time;
+import ballerinax/health.fhir.r4.international401;
 public type Error distinct error;
 
-public function main() returns Error? {
+public function main() returns error? {
     xml patient = xml `
         <Patient xmlns="http://hl7.org/fhir">
             <id value="example"/> 
@@ -137,26 +138,39 @@ public function main() returns Error? {
             </managingOrganization> 
             </Patient> 
     `;
+    
+    // json jpatient = {
+    //     meta: {
+    //         lastUpdated: time:utcToString(time:utcNow()),
+    //         profile: [international401:PROFILE_BASE_PATIENT]
+    //     },
+    //     active: true,
+    //     name: [{
+    //         family: "Doe",
+    //         given: ["Jhon"],
+    //         use: international401:CODE_MODE_OFFICIAL,
+    //         prefix: ["Mr"]
+    //     }],
+    //     address: [{
+    //         line: ["652 S. Lantern Dr."],
+    //         city: "New York",
+    //         country: "United States",
+    //         postalCode: "10022",
+    //         'type: "both",
+    //         use: "home"
+    //     }]
+    // };
 
-    // json patientJson = check convertXmlToJsonBal(patient);
+    international401:Patient fromJsonWithType = check convertFhirXmlToRecord(patient, international401:Patient);
+    io:println(fromJsonWithType.resourceType);
+
+    // json patientJson = check convertFhirXmlToJson(patient);
     // do {
-	//     json jj = check patientJson.name;
-    //     decimal num = check jj.name;
-    //     io:print(num); 
+	//     boolean active = check patientJson.active;
+    //     io:println(active);
     // } on fail var e {
-    // 	io:print(e);
+    // 	io:println(e);
     // }
-    // io:println(patientJson);
-    // string hi = check hello();
-    // io:println(hi);
-
-    json patientJson = check convertTest(patient);
-    do {
-	    boolean active = check patientJson.active;
-        io:println(active);
-    } on fail var e {
-    	io:println(e);
-    }
 }
 
 # Converts an XML object to its JSON representation.
@@ -167,14 +181,10 @@ public function main() returns Error? {
 #
 # + xmlValue - The XML source to be converted to JSON
 # + return - The JSON representation of the given XML on success, else returns an `xmldata:Error`
-public isolated function convertXmlToJsonBal(xml xmlValue) returns json|Error = @java:Method {
+public isolated function convertFhirXmlToJson(xml xmlValue) returns json|Error = @java:Method {
     'class: "nimsara66.fhir.FHIRParser"
 } external;
 
-public isolated function convertTest(xml xmlValue) returns json|Error = @java:Method {
-    'class: "nimsara66.fhir.FHIRParser"
-} external;
-
-public isolated function hello() returns string|Error = @java:Method {
+public isolated function convertFhirXmlToRecord(xml xmlValue, typedesc<anydata> t = <>) returns t|Error = @java:Method {
     'class: "nimsara66.fhir.FHIRParser"
 } external;
