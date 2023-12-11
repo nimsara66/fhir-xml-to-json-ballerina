@@ -1,5 +1,7 @@
 import ballerina/jballerina.java;
 
+public type Error distinct error;
+
 # Convert FHIR XML to JSON
 #
 # + xmlValue - FHIR XML to be converted to JSON

@@ -16,7 +16,7 @@ import io.ballerina.runtime.internal.ValueConverter;
 public class FHIRParser {
     private static final FhirContext context = FhirContext.forR4();
 
-    public static Object convertFhirXmlToJson(final BXml content) throws DataFormatException {
+    public static Object fhirXmlToJson(final BXml content) throws DataFormatException {
         IParser source = context.newXmlParser(); // new XML parser
         IBaseResource resource = source.parseResource(content.toString()); // parse the resource
         IParser target = context.newJsonParser(); // new JSON parser
@@ -25,7 +25,7 @@ public class FHIRParser {
         return JsonUtils.parse(bstring);
     }
 
-    public static Object convertFhirXmlToRecord(final BXml content, BTypedesc t) throws DataFormatException {
+    public static Object fhirXmlToRecord(final BXml content, BTypedesc t) throws DataFormatException {
         IParser source = context.newXmlParser(); // new XML parser
         IBaseResource resource = source.parseResource(content.toString()); // parse the resource
         IParser target = context.newJsonParser(); // new JSON parser
